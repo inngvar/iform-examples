@@ -35,11 +35,14 @@ public class DataWorkflow {
 	 *            ƒанные над которыми будет выполненна операци€.ј
 	 */
 	public void doWork(WorkData workData) {
-
-		remoteService.sendDataToRemoteService(workData); // ќтошлем данные на
-															// удаленный сервис
+		
 		workData = calcService.calculate(workData); // ¬ыполнить необходимые
 													// вычислени€.
-		dbService.saveToDB(workData);// сохранить данные в базу данных
+		workData = dbService.saveToDB(workData);// сохранить данные в базу данных
+		
+		remoteService.sendDataToRemoteService(workData); // ќтошлем данные на
+		// удаленный сервис
+		
+		
 	}
 }

@@ -8,4 +8,10 @@ package org.iforum.examples.servicies;
  */
 public interface WorkData {
 
+	/**
+	 * 
+	 * @return Колличество данных в workData
+	 */
+	public int getCount();
+	
 }
