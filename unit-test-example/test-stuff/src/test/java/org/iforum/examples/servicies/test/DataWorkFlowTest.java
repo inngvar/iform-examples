@@ -1,4 +1,5 @@
 package org.iforum.examples.servicies.test;
+
 import org.easymock.EasyMock;
 import org.iforum.examples.servicies.CalcService;
 import org.iforum.examples.servicies.DBService;
@@ -57,22 +58,23 @@ public class DataWorkFlowTest {
 	 */
 	@Before
 	public void initialize() {
-		// Создаем список данных который будет проходить по нашей цепочки
+		// Создаем список данных который будет использован для тестирования.
 		sourceData = createData();
 		calculatedData = createData();
 		savedData = createData();
-
-		// Сервис сохранения базы данных дожен попасть данные после расчетов, а
-		// на выходе дожны быть данные после сохранения
-		dbService = createDBService(calculatedData, savedData);
 
 		// В сервис расчета должны попасть исходные данные, а на выходе дожны
 		// быть данные после расчетов.
 		calcService = createCalcService(sourceData, calculatedData);
 
+		// Сервис сохранения базы данных дожен попасть данные после расчетов, а
+		// на выходе дожны быть данные после сохранения
+		dbService = createDBService(calculatedData, savedData);
+
 		// В сервис отправки сообщений на удаленный сервер дожны попасть
 		// сохраненные данные
 		remoteService = createRemoteService(savedData);
+
 		dataWorkflow = new DataWorkflow(remoteService, calcService, dbService);
 
 	}
